@@ -127,12 +127,13 @@ function MiniCalendar({ history }) {
 
 // ── GuildScreen — sistema de gremios ──────────────────────────
 function GuildScreen({ user, hero, guild, guildId, onGuildUpdate }) {
-  const [view, setView]           = React.useState('home'); // home | create | join
-  const [guildName, setGuildName] = React.useState('');
-  const [codeInput, setCodeInput] = React.useState('');
-  const [loading, setLoading]     = React.useState(false);
-  const [error, setError]         = React.useState(null);
-  const [copied, setCopied]       = React.useState(false);
+  const [view, setView]             = React.useState('home'); // home | create | join
+  const [guildName, setGuildName]   = React.useState('');
+  const [codeInput, setCodeInput]   = React.useState('');
+  const [loading, setLoading]       = React.useState(false);
+  const [error, setError]           = React.useState(null);
+  const [copied, setCopied]         = React.useState(false);
+  const [confirmLeave, setConfirmLeave] = React.useState(false);
 
   // ── Handlers ──
   const handleCreate = async () => {
@@ -277,7 +278,7 @@ function GuildScreen({ user, hero, guild, guildId, onGuildUpdate }) {
               {error}
             </div>
           )}
-          <button onClick={handleLeave} disabled={loading} style={{
+          <button onClick={() => setConfirmLeave(true)} disabled={loading} style={{
             marginTop:20, width:'100%', padding:'11px',
             background:'rgba(125,30,30,0.25)', border:'1px solid rgba(178,40,40,0.35)',
             borderRadius:3, cursor: loading ? 'not-allowed' : 'pointer',
@@ -287,6 +288,17 @@ function GuildScreen({ user, hero, guild, guildId, onGuildUpdate }) {
             Abandonar el gremio
           </button>
         </div>
+
+        {/* Confirmación abandonar gremio */}
+        {confirmLeave && (
+          <ConfirmDialog
+            title="¿Abandonar el gremio?"
+            message={`Dejarás "${guild.name}". Podés volver a unirte con el código de invitación.`}
+            confirmLabel="Sí, abandonar"
+            onConfirm={() => { setConfirmLeave(false); handleLeave(); }}
+            onCancel={() => setConfirmLeave(false)}
+          />
+        )}
       </div>
     );
   }

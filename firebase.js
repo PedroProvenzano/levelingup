@@ -60,7 +60,7 @@ function makeInitialHero(displayName, photoURL) {
       constitucion: { value: 5, label: "Constitución", glyph: "♥" },
       disciplina:   { value: 5, label: "Disciplina",   glyph: "❖" },
       carisma:      { value: 5, label: "Carisma",      glyph: "✿" },
-      fortuna:      { value: 5, label: "Fortuna",      glyph: "✪" },
+      agilidad:     { value: 5, label: "Agilidad",     glyph: "☽" },
     }
   };
 }

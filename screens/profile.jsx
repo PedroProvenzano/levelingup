@@ -1,5 +1,6 @@
 // Profile / Heraldo screen — con foto de Google y logout
 function ProfileScreen({ hero, user, achievements: achProp, onLogout, onAvatar }) {
+  const [confirmLogout, setConfirmLogout] = React.useState(false);
   // Usar achievements del prop si existen, si no los globales como fallback
   const achievementsData = achProp || {};
   const achievementsList = ACHIEVEMENTS.map(a => ({
@@ -137,7 +138,7 @@ function ProfileScreen({ hero, user, achievements: achProp, onLogout, onAvatar }
         {/* Logout */}
         <div style={{ marginTop:28 }}>
           <button
-            onClick={onLogout}
+            onClick={() => setConfirmLogout(true)}
             style={{
               width:'100%', padding:'12px',
               background:'rgba(125,30,30,0.35)',
@@ -146,15 +147,23 @@ function ProfileScreen({ hero, user, achievements: achProp, onLogout, onAvatar }
               fontFamily:'Cinzel', fontSize:11,
               color:'var(--parch-stain)', letterSpacing:'0.2em',
               boxShadow:'0 3px 8px rgba(0,0,0,0.4)',
-              transition:'background 200ms',
             }}
-            onMouseEnter={e => e.target.style.background = 'rgba(125,30,30,0.55)'}
-            onMouseLeave={e => e.target.style.background = 'rgba(125,30,30,0.35)'}
           >
             Abandonar el reino
           </button>
         </div>
       </div>
+
+      {/* Confirmación logout */}
+      {confirmLogout && (
+        <ConfirmDialog
+          title="¿Abandonar el reino?"
+          message="Cerrarás sesión. Tu progreso está a salvo en las arcas reales."
+          confirmLabel="Sí, salir"
+          onConfirm={onLogout}
+          onCancel={() => setConfirmLogout(false)}
+        />
+      )}
     </div>
   );
 }

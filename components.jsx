@@ -210,4 +210,38 @@ function ScreenHeader({ title, subtitle, onBack }) {
   );
 }
 
-Object.assign(window, { Nail, WaxSeal, GoldDivider, Coin, Flame, Ribbon, TabBar, TypeChip, StatBadge, ScreenHeader, ModeToggleBtn });
+// ── Diálogo de confirmación medieval ─────────────────────────
+function ConfirmDialog({ title, message, confirmLabel = "Confirmar", onConfirm, onCancel }) {
+  return (
+    <div style={{
+      position:'absolute', inset:0, zIndex:150,
+      display:'grid', placeItems:'center',
+      background:'rgba(0,0,0,0.72)',
+      animation:'float-in 180ms ease-out',
+    }}>
+      <div className="parch torn-a" style={{
+        margin:'0 24px', padding:'26px 22px',
+        textAlign:'center',
+        transform:'rotate(-0.5deg)',
+      }}>
+        <div style={{ fontSize:28, marginBottom:10 }}>⚔</div>
+        <div className="t-display" style={{ fontSize:22, color:'var(--ink)', lineHeight:1, marginBottom:8 }}>
+          {title}
+        </div>
+        <div className="t-script" style={{ fontStyle:'italic', fontSize:13, color:'var(--ink-soft)', lineHeight:1.4 }}>
+          {message}
+        </div>
+        <div className="row" style={{ gap:10, marginTop:20 }}>
+          <button onClick={onCancel} className="btn-parch" style={{ flex:1, padding:'11px' }}>
+            Cancelar
+          </button>
+          <button onClick={onConfirm} className="btn-iron" style={{ flex:1, padding:'11px' }}>
+            {confirmLabel}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, { Nail, WaxSeal, GoldDivider, Coin, Flame, Ribbon, TabBar, TypeChip, StatBadge, ScreenHeader, ModeToggleBtn, ConfirmDialog });
