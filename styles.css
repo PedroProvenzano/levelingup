@@ -82,7 +82,7 @@ body {
 /* Stage centers the mobile viewport */
 .stage {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   display: grid;
   place-items: center;
   background:
@@ -93,7 +93,7 @@ body {
 .viewport {
   position: relative;
   width: min(430px, 100vw);
-  height: min(932px, 100vh);
+  height: min(932px, 100dvh);
   overflow: hidden;
   background: var(--wood-dark);
   box-shadow:
